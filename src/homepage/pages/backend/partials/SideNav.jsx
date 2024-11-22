@@ -24,7 +24,7 @@ const SideNav = () => {
   ]
   return (
     <>
-     <aside className='p-4'>
+     <aside className='p-4 border-r border-line'>
             <img src={`${imgPath}/logo.png`} alt="" className='w-[60%] mx-auto mt-2' />
         <nav>
           <ul className='mt-10'>

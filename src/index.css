@@ -98,7 +98,10 @@
   .btn{
     @apply p-1.5 border border-transparent flex gap-2 rounded-md transition-all items-center bg-primary text-sm py-2;
   }
-  .btn-add{
+  .btn:disabled{
+    @apply pointer-events-none opacity-50;
+  }
+  .btn-add, .btn-accent{
     @apply bg-accent text-white hover:bg-opacity-80;
   }
   .btn-alert{
@@ -126,7 +129,7 @@
     @apply sticky top-0 bg-primary z-30 h-[41px];
   }
   .table-wrapper table tbody tr:nth-child(odd){
-    @apply bg-[#151b25];
+    @apply bg-primary;
   }
   .table-wrapper table td,th{
     @apply p-1.5 text-sm;
@@ -155,10 +158,13 @@
 .tooltip:hover::before{
 @apply opacity-100 ;
 }
-  
-
+.loading-bar {
+  @apply overflow-hidden relative;
 }
-@layer utilities{
+.loading-bar::after {
+  @apply content-[''] absolute top-0 left-0 w-full h-full  bg-skeleton animate-loading;
+}
+
   .layout-main{
     @apply h-screen bg-primary;
   }
@@ -171,6 +177,40 @@
   .layout-division aside{
     @apply bg-secondary max-w-[200px] w-full;
   }
+
+  .input-wrap{
+    @apply mb-2 relative ;
+  }
+  .input-wrap input, textarea, select{
+    @apply px-2 py-1 w-full outline-none border border-line bg-primary text-body rounded-md focus:border-info;
+  }
+  .input-wrap label{
+    @apply text-xs
+  }
+  .input-wrap .show-error{
+    @apply absolute top-1 right-0 text-alert text-xs italic
+  }
+  .input-wrap:has(.show-error) input, 
+  .input-wrap:has(.show-error) textarea,
+  .input-wrap:has(.show-error) select{
+    @apply border-alert animate-shake;
+  }
+  .input-wrap:has(.show-error) label{
+    @apply text-alert;
+  }
+  .input-wrap textarea{
+    @apply resize-none h-[100px]
+  }
+  
+
+  .input-wrap input:disabled, 
+  .input-wrap textarea:disabled,
+  .input-wrap select:disabled{
+    @apply pointer-events-none opacity-60;
+  }
+}
+@layer utilities{
+
 }
 
 /* width */
@@ -187,4 +227,32 @@
 /* Handle on hover */
 .custom-scroll::-webkit-scrollbar-thumb:hover {
   background: #b0070d;
+}
+.spinner circle {
+  fill: none;
+  stroke-width: 6;
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: dash 1s ease-in-out infinite;
+}
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
+  }
+
+  100% {
+    stroke-dashoffset: -110px;
+  }
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
