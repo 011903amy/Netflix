@@ -5,13 +5,32 @@ import Pills from '../partials/Pills'
 import { Archive, ArchiveRestore, FilePenLine, FileVideo, Trash2 } from 'lucide-react'
 import LoadMore from '../partials/LoadMore'
 import IconNoData from '../partials/IconNoData'
+import ModalDelete from '../partials/modals/ModalDelete'
+import ModalConfirm from '../partials/modals/ModalConfirm'
+import { StoreContext } from '@/store/storeContext'
+import { setIsConfirm, setIsDelete, setIsView } from '@/store/StoreAction'
+import ModalViewMovie from './ModalViewMovie'
 
 const MoviesTable = () => {
+  const {store, dispatch} = React.useContext(StoreContext);
+  const handleDelete = () =>{
+    dispatch(setIsDelete(true));
+  }
+  const handleRestore = () => {
+    dispatch(setIsConfirm(true));
+  }
+  const handleArchive = () => {
+    dispatch(setIsConfirm(true));
+  }
+  const handleView = () => {
+    dispatch(setIsView(true));
+  }
+  
   return (
     <div> <div className="relative p-4 bg-secondary rounded-md mt-10 border border-line">
     {/* <SpinnerTable /> */}
     <div className="table-wrapper custom-scroll">
-      <TableLoader count={20} cols={4}/>
+      {/* <TableLoader count={20} cols={4}/> */}
       <table>
         <thead>
           <tr>
@@ -24,11 +43,11 @@ const MoviesTable = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
+          {/* <tr>
             <td colSpan={100}>
               <IconNoData/>
             </td>
-          </tr>
+          </tr> */}
           {/* <tr>
             <td colSpan={100}>
               <IconServerError/>
@@ -50,7 +69,7 @@ const MoviesTable = () => {
                       <li>
                         <button
                           className="tooltip"
-                          data-tooltip="View"
+                          data-tooltip="View" onClick={handleView}
                         >
                           <FileVideo />
                         </button>
@@ -67,7 +86,7 @@ const MoviesTable = () => {
                         <button
                           className="tooltip"
                           data-tooltip="Archive"
-                        >
+                        onClick={() =>handleArchive()}>
                           <Archive />
                         </button>
                       </li>
@@ -78,14 +97,14 @@ const MoviesTable = () => {
                         <button
                           className="tooltip"
                           data-tooltip="Restore"
-                        >
+                        onClick={() =>handleRestore()}>
                           <ArchiveRestore />
                         </button>
                       </li>
                       <li>
                         <button
                           className="tooltip"
-                          data-tooltip="Delete"
+                          data-tooltip="Delete" onClick={() =>handleDelete()}
                         >
                           <Trash2 />
                         </button>
@@ -101,7 +120,12 @@ const MoviesTable = () => {
 
       <LoadMore />
     </div>
-  </div></div>
+  </div>
+  {store.isDelete && <ModalDelete/>}
+  {store.isConfirm && <ModalConfirm/>}
+  {store.isView && <ModalViewMovie/>}
+  </div>
+  
   )
 }
 

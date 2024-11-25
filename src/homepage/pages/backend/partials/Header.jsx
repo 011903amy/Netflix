@@ -1,7 +1,8 @@
 import { Moon, Settings, Sun } from 'lucide-react'
 import React from 'react'
+import { Link } from 'react-router-dom';
 
-const Header = () => {
+const Header = ({title = "Movies",subtitle = "List of Available Movie"}) => {
 
   const [isDark, setIsDark] = React.useState(
     localStorage.getItem("theme") === "dark" ? true : false
@@ -37,8 +38,8 @@ const Header = () => {
     <header className='bg-secondary'>
             <div className='flex justify-between items-center p-4'>
               <div className='[&>*]:mb-0 '>
-                <h4>Movies</h4>
-                <p>List of Available Movies</p>
+                <h4>{title}</h4>
+                <p>{subtitle}</p>
               </div>
 
               <div className='flex items-center gap-6'>
@@ -47,7 +48,7 @@ const Header = () => {
                   <span className={`${isDark ? "" : "translate-x-6 transition-all duration-700"} size-[16px] rounded-full bg-secondary grid place-content-center`}>{isDark ? (<Sun size={14} stroke='white'/>) :(<Moon size={14} stroke='black'/>)}</span>
                   </button>
                
-                <button><Settings/></button>
+                <Link to="/admin/settings"><Settings/></Link>
                 <button className='size-[30px] rounded-full bg-accent grid place-content-center text-white'>AV</button>
               </div>
             </div>

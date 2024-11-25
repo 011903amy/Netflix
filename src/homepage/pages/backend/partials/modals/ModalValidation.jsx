@@ -1,8 +1,14 @@
 import { Archive, Info, Trash2, X } from 'lucide-react'
 import React from 'react'
 import ModalWrapper from './ModalWrapper'
+import { StoreContext } from '@/store/storeContext';
 
 const ModalValidation = () => {
+  const {dispatch} = React.useContext(StoreContext);
+
+  const handleClose = () => {
+    dispatch(setValidate(false));
+  }
   return (
     <>
       
@@ -13,7 +19,7 @@ const ModalValidation = () => {
           <h5 className=''>Validation Issue</h5>
             <p className='my-5 text-center'>The title already exist</p>
 
-                  <button className='btn btn-info w-full flex justify-center text-center '>Okay</button>
+                  <button className='btn btn-info w-full flex justify-center text-center ' onClick={handleClose}>Okay</button>
             
           </div>
         </div>

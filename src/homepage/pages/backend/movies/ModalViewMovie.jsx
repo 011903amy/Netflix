@@ -2,8 +2,15 @@ import React from 'react'
 import ModalWrapper from '../partials/modals/ModalWrapper'
 import { imgPath } from '@/helpers/functions-general'
 import { Play, Plus, ThumbsUp, X } from 'lucide-react'
+import { StoreContext } from '@/store/storeContext'
+import { setIsView } from '@/store/StoreAction'
 
 const ModalViewMovie = () => {
+  const {store, dispatch} = React.useContext(StoreContext);
+
+  const handleClose = () =>{
+    dispatch(setIsView(false));
+  }
   return (
     <ModalWrapper>
       <div className="modal-main bg-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[800px] w-full rounded-md overflow-hidden border border-line">
@@ -20,13 +27,15 @@ const ModalViewMovie = () => {
       </div>
       
       <div className="tint absolute bottom-0 left-0 w-full h-[70%] bg-gradient-to-t from-black to-transparent"></div>
-      <button className='absolute top-3 right-3 size-[35px] grid place-content-center text-dark bg-light rounded-full'><X/></button>
+      <button className='absolute top-3 right-3 size-[35px] grid place-content-center text-dark bg-light rounded-full' onClick={() => handleClose()}><X/></button>
       </div> 
 
       <div className="modal-body p-4 ">
         <div className='grid grid-cols-[1fr,_250px] gap-5'>
        <div>
         <ul className='flex gap-3 items-center text-xs mb-3'>
+          <li  className='border-[1px] border-dark p-[1px] py-1 px-2.5 text-[12px] leading-none'>
+            <span className='translate-y-0 block'>16+</span></li>
           <li>2022</li>
           <li>1hr 44mins</li>
           <li className='border-[1px] border-dark p-[1px] py-[0.5px] px-1.5 text-[9px]'>HD</li>
@@ -54,6 +63,8 @@ const ModalViewMovie = () => {
                 <div className='p-4 bg-secondary'>
                   <div className='flex justify-between items-center mb-5'>
                      <ul className='flex gap-3 items-center text-xs'>
+                     <li  className='border-[1px] border-dark p-[1px] py-1 px-2.5 text-[12px] leading-none'>
+                     <span className='translate-y-0 block'>16+</span></li>
               <li>2022</li>
               <li className='border-[1px] border-dark p-[1px] py-[0.5px] px-1.5 text-[9px]'>HD</li>
               </ul>

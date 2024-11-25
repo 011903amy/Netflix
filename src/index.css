@@ -116,9 +116,9 @@
   .btn-info{
     @apply bg-info text-white hover:bg-opacity-80;
   }
-  .btn-info{
+  /* .btn-info{
     @apply bg-alert text-white hover:bg-opacity-80;
-  }
+  } */
   .table-wrapper {
     @apply  bg-secondary max-h-[69vh] overflow-x-hidden overflow-y-auto;
   }
@@ -130,6 +130,9 @@
   }
   .table-wrapper table tbody tr:nth-child(odd){
     @apply bg-primary;
+  }
+  .table-wrapper table thead tr{
+    @apply bg-secondary;
   }
   .table-wrapper table td,th{
     @apply p-1.5 text-sm;
