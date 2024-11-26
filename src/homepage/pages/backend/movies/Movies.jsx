@@ -1,8 +1,6 @@
 import { setIsAdd, setMessage } from "@/store/StoreAction";
 import { StoreContext } from "@/store/StoreContext";
-import {
-  Plus
-} from "lucide-react";
+import { Plus } from "lucide-react";
 import React from "react";
 import Footer from "../partials/Footer";
 import Header from "../partials/Header";
@@ -16,11 +14,11 @@ import ToastSuccess from "../partials/ToastSuccess";
 import ModalViewMovie from "./ModalViewMovie";
 
 const Movies = () => {
- const {dispatch, store} = React.useContext(StoreContext);
+  const { dispatch, store } = React.useContext(StoreContext);
 
- const handleAdd = () => {
-  dispatch(setIsAdd(true));
- }
+  const handleAdd = () => {
+    dispatch(setIsAdd(true));
+  };
   return (
     <>
       <section className="layout-main">
@@ -44,15 +42,14 @@ const Movies = () => {
           </main>
         </div>
       </section>
-      
-      
-      {store.validate && <ModalValidation/>}
-      {store.validate && <ModalError/>}
-      {store.success && <ToastSuccess />}
-      
+
+      {store.isValidate && <ModalValidation />}
+      {store.error && <ModalError />}
+      {store.isSuccess && <ToastSuccess />}
+
       {/* <SpinnerWindow /> */}
-      {store.isAdd && <ModalAddMovie/>}
-      {store.isAdd && <ModalViewMovie/>}
+      {store.isAdd && <ModalAddMovie />}
+      {/* {store.isView && <ModalViewMovie/>} */}
     </>
   );
 };
